@@ -50,3 +50,6 @@ fabric.properties
 
 # Python compiled files.
 **/*.pyc
+**/*.tar
+**/*.gz
+
