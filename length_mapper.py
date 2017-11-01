@@ -27,9 +27,9 @@ class LengthMapper():
                 else:
                     results[word] = 1
 
-        sorted_x = sorted(results.items(), key=operator.itemgetter(0))
+        #sorted_x = sorted(results.items(), key=operator.itemgetter(0))
 
-        return sorted_x
+        return results
 
     def save_data(self, key, value):
         self.sysout.write("{1}\t{0}\n".format(key, value))
@@ -43,11 +43,11 @@ class LengthMapper():
                 if len(fields) > 4 :
                     body = fields[4]
                     line_words = self.process(body)
-                    for w in line_words:
-                        if w[0] in all_words.keys():
-                            all_words[w[0]] = all_words[w[0]] + w[1]
+                    for w in line_words.keys():
+                        if w in all_words.keys():
+                            all_words[w] = all_words[w] + line_words[w]
                         else:
-                            all_words[w[0]] = w[1]
+                            all_words[w] = line_words[w]
 
             for k in all_words.keys():
                 self.save_data(k, all_words[k])
