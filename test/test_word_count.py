@@ -34,7 +34,8 @@ class test_word_count(unittest.TestCase):
 
     def test_splitter(self):
         mapper = LengthMapper()
-        txt = mapper.splitter('This is some <funky>! <p>fantastic</p>bad text')
+        txt = mapper.splitter('This is "some" <funky>! <p>fantastic</p>bad text')
+        print(txt)
         self.assertTrue(txt[0]=='this')
         self.assertTrue(txt[1] == 'is')
         self.assertTrue(txt[2] == 'some')

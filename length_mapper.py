@@ -18,8 +18,9 @@ class LengthMapper():
     def splitter(self, words):
         words = words.lower()
         for c in self.specialChar:
-            words = words.replace(c, ' ')
-        split = words.split()
+            words = words.replace(c, " ")
+        split = words.split(" ")
+
         return split
 
     def process(self, words):
@@ -37,7 +38,7 @@ class LengthMapper():
         return results
 
     def save_data(self, key, value):
-        self.sysout.write("{1}\t->{0}<-\n".format(key, value))
+        self.sysout.write("{0}\t{1}\n".format(key, value))
 
     def map(self):
         all_words = dict()
@@ -46,16 +47,10 @@ class LengthMapper():
             for line in self.sysin:
                 fields = line.split('\t')
                 if len(fields) > 4:
-                    for k in self.word_list:
-                        if k in fields[4]:
-                            line_words = self.process(fields[4])
-                            for w in line_words.keys():
-                                if k in w:
-                                    self.save_data(fields[0], w)
-
-            # if len(all_words.keys()) > 0:
-            #     for k in all_words.keys():
-            #         self.save_data(k, all_words[k])
+                    line_words = self.splitter(fields[4])
+                    for w in line_words:
+                        if self.word_list[0] in w:
+                            self.save_data(fields[0], w)
 
         except Exception as ex:
             logging.error("An error has occurred:\n{0}\n".format(ex.message))
