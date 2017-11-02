@@ -8,6 +8,7 @@ sys.path.append('./')
 class LengthMapper():
 
     logging.basicConfig(filename='mapper.log')
+    word_list = list()
 
     sysin = sys.stdin
     sysout = sys.stdout
@@ -38,14 +39,14 @@ class LengthMapper():
     def save_data(self, key, value):
         self.sysout.write("{1}\t->{0}<-\n".format(key, value))
 
-    def map(self, word_list):
+    def map(self):
         all_words = dict()
         logging.debug("Starting mapper job")
         try:
             for line in self.sysin:
                 fields = line.split('\t')
                 if len(fields) > 4:
-                    for k in word_list:
+                    for k in self.word_list:
                         if k in fields[4]:
                             line_words = self.process(fields[4])
                             for w in line_words.keys():
@@ -63,8 +64,10 @@ class LengthMapper():
             logging.error("An error has occurred:\n{0}\n".format(ex.message))
         finally:
             logging.debug("Mapping complete. Closing local mapper log file.")
+            return all_words
 
 #Do the work
 if __name__ == "__main__":
     mapper = LengthMapper()
-    mapper.map(["fantastic"])
+    mapper.word_list = ['a']
+    mapper.map()

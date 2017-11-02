@@ -22,6 +22,15 @@ class test_word_count(unittest.TestCase):
         mapper.map()
         self.assertTrue(my_mock.write.called, "Failed to call the writer!")
 
+    @mock.patch('sys.stdout')
+    def test_count_right_number(self, my_mock):
+        mapper = LengthMapper()
+        mapper.sysin = open('../data/dumb_data.tsv', 'r')
+        mapper.sysout = my_mock
+        mapper.word_list = ['miles']
+        results = mapper.map()
+        self.assertTrue(results['miles']==10)
+        self.assertTrue(my_mock.write.called, "Failed to call the writer!")
 
     def test_splitter(self):
         mapper = LengthMapper()
