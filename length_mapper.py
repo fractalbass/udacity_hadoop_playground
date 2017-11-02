@@ -12,21 +12,16 @@ class LengthMapper():
     sysin = sys.stdin
     sysout = sys.stdout
 
-    specialChar = ['.', ',', '!', '?', ':', ';', '"', '(', ')', '<', '>', '[', ']', '#', '$', '=', '-', '/']
-
-    def clean_word(self, text):
-        for c in self.specialChar:
-            text = text.replace(c, '').lower()
-        return text
+    specialChar = ['.', ',', '!', '?', ':', ';', '"', '(', ')', '<', '>', '[', ']', '#', '$', '=', '-', '/', ' ']
 
     def process(self, words):
 
         results = dict()
 
-        for phrase in words.split():
-            for word in phrase.split():
+        for c in self.specialChar:
+            words = words.replace(c, ' ')
 
-
+        for word in words.split():
                 if word in results.keys():
                     results[word] = results[word] + 1
                 else:
@@ -48,9 +43,7 @@ class LengthMapper():
                 if len(fields) > 4:
                     for k in word_list:
                         if k in fields[4]:
-                            body = self.clean_word(fields[4])
-                            line_words = self.process(body)
-
+                            line_words = self.process(fields[4])
                             for w in line_words.keys():
                                 if k in w:
                                     if w in all_words.keys():

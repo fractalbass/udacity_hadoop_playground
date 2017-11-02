@@ -1,0 +1,3 @@
+ERROR:root:An error has occurred:
+LengthMapper instance has no attribute 'clean_word'
+
