@@ -47,8 +47,8 @@ class LengthMapper():
         try:
             for line in self.sysin:
                 fields = line.split('\t')
-                if len(fields) > 4:
-                    line_words = self.splitter(fields[4])
+                for f in fields:
+                    line_words = self.splitter(f)
                     for w in line_words:
                         if self.word_list[0] in w:
                             i = i + 1
