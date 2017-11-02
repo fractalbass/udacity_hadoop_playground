@@ -46,13 +46,9 @@ class LengthMapper():
         i=0
 
         for line in self.sysin:
-            fields = line.split('\t')
-            for f in fields:
-                line_words = self.splitter(f)
-                for w in line_words:
-                    if self.word_list[0] in w:
-                        i = i + 1
-                        self.save_data(fields[0], w)
+            if "fantastically" in line:
+                fields = line.split('\t')
+                    self.save_data(fields[0], "fantastically")
 
 
 #Do the work
