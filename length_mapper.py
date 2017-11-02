@@ -51,14 +51,11 @@ class LengthMapper():
                             line_words = self.process(fields[4])
                             for w in line_words.keys():
                                 if k in w:
-                                    if w in all_words.keys():
-                                        all_words[w] = all_words[w] + line_words[w]
-                                    else:
-                                        all_words[w] = line_words[w]
+                                    self.save_data(fields[0], w)
 
-            if len(all_words.keys()) > 0:
-                for k in all_words.keys():
-                    self.save_data(k, all_words[k])
+            # if len(all_words.keys()) > 0:
+            #     for k in all_words.keys():
+            #         self.save_data(k, all_words[k])
 
         except Exception as ex:
             logging.error("An error has occurred:\n{0}\n".format(ex.message))
@@ -69,5 +66,5 @@ class LengthMapper():
 #Do the work
 if __name__ == "__main__":
     mapper = LengthMapper()
-    mapper.word_list = ['fantastic']
+    mapper.word_list = ["fantastic"]
     mapper.map()

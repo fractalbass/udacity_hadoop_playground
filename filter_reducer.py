@@ -19,7 +19,10 @@ class LengthReducer():
         for line in self.sysin:
             fields = line.split()
             if len(fields) == 2:
-                self.save_data(fields[0], fields[1])
+                if fields[0] == "fantastic":
+                    search_count=search_count+1
+
+        self.save_data('fantastic', search_count)
 
         if key is not None:
             return search_count
