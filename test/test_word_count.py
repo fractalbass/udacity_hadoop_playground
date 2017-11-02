@@ -20,4 +20,12 @@ class test_word_count(unittest.TestCase):
         mapper.sysin = open('../data/forum_500.tsv', 'r')
         mapper.sysout = my_mock
         mapper.map()
-        self.assertTrue(my_mock.write.called, "Failed to call the parser!")
+        self.assertTrue(my_mock.write.called, "Failed to call the writer!")
+
+
+    def test_clean_word(self):
+        mapper = LengthMapper()
+        txt = mapper.clean_word('This is some <funky>! bad text')
+        self.assertTrue(txt == "this is some funky bad text")
+        self.assertTrue("<" not in txt)
+        self.assertTrue("T" not in txt)

@@ -1,3 +1,9 @@
 ERROR:root:An error has occurred:
 string index out of range
 
+ERROR:root:An error has occurred:
+'str' object has no attribute 'contains'
+
+ERROR:root:An error has occurred:
+'str' object has no attribute 'trim'
+

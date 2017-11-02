@@ -12,7 +12,12 @@ class LengthMapper():
     sysin = sys.stdin
     sysout = sys.stdout
 
-    specialChar = ['.', ',', '!', '?', ':', ';', '"', '(', ')', '<', '>', '[', ']', '#', '$', '=', '-', '/', ' ']
+    specialChar = ['.', ',', '!', '?', ':', ';', '"', '(', ')', '<', '>', '[', ']', '#', '$', '=', '-', '/']
+
+    def clean_word(self, text):
+        for c in self.specialChar:
+            text = text.replace(c, '').lower()
+        return text
 
     def process(self, words):
 
@@ -20,8 +25,8 @@ class LengthMapper():
 
         for phrase in words.split():
             for word in phrase.split():
-                for c in self.specialChar:
-                    word = word.replace(c, '')
+
+
                 if word in results.keys():
                     results[word] = results[word] + 1
                 else:
@@ -34,23 +39,28 @@ class LengthMapper():
     def save_data(self, key, value):
         self.sysout.write("{1}\t{0}\n".format(key, value))
 
-    def map(self):
+    def map(self, word_list):
         all_words = dict()
         logging.debug("Starting mapper job")
         try:
             for line in self.sysin:
                 fields = line.split('\t')
-                if len(fields) > 4 :
-                    body = fields[4]
-                    line_words = self.process(body)
-                    for w in line_words.keys():
-                        if w in all_words.keys():
-                            all_words[w] = all_words[w] + line_words[w]
-                        else:
-                            all_words[w] = line_words[w]
+                if len(fields) > 4:
+                    for k in word_list:
+                        if k in fields[4]:
+                            body = self.clean_word(fields[4])
+                            line_words = self.process(body)
 
-            for k in all_words.keys():
-                self.save_data(k, all_words[k])
+                            for w in line_words.keys():
+                                if k in w:
+                                    if w in all_words.keys():
+                                        all_words[w] = all_words[w] + line_words[w]
+                                    else:
+                                        all_words[w] = line_words[w]
+
+            if len(all_words.keys()) > 0:
+                for k in all_words.keys():
+                    self.save_data(k, all_words[k])
 
         except Exception as ex:
             logging.error("An error has occurred:\n{0}\n".format(ex.message))
@@ -60,4 +70,4 @@ class LengthMapper():
 #Do the work
 if __name__ == "__main__":
     mapper = LengthMapper()
-    mapper.map()
+    mapper.map(["fantastic"])
