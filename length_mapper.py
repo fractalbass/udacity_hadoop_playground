@@ -46,7 +46,7 @@ class LengthMapper():
         i=0
 
         for line in self.sysin:
-            if "fantastically" in line:
+            if "fantastically" in line.lower():
                 fields = line.split('\t')
                 self.save_data(fields[0], "fantastically")
 
