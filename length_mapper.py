@@ -63,5 +63,5 @@ class LengthMapper():
 #Do the work
 if __name__ == "__main__":
     mapper = LengthMapper()
-    mapper.word_list = ["fantastic"]
+    mapper.word_list = ["fantasatic"]
     mapper.map()
