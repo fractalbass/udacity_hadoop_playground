@@ -14,14 +14,18 @@ class LengthMapper():
 
     specialChar = ['.', ',', '!', '?', ':', ';', '"', '(', ')', '<', '>', '[', ']', '#', '$', '=', '-', '/', ' ']
 
+    def splitter(self, words):
+        words = words.lower()
+        for c in self.specialChar:
+            words = words.replace(c, ' ')
+        split = words.split()
+        return split
+
     def process(self, words):
 
         results = dict()
 
-        for c in self.specialChar:
-            words = words.replace(c, ' ')
-
-        for word in words.split():
+        for word in self.splitter(words):
                 if word in results.keys():
                     results[word] = results[word] + 1
                 else:

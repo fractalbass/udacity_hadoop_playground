@@ -23,9 +23,17 @@ class test_word_count(unittest.TestCase):
         self.assertTrue(my_mock.write.called, "Failed to call the writer!")
 
 
-    def test_clean_word(self):
+    def test_splitter(self):
         mapper = LengthMapper()
-        txt = mapper.clean_word('This is some <funky>! bad text')
-        self.assertTrue(txt == "this is some funky bad text")
+        txt = mapper.splitter('This is some <funky>! <p>fantastic</p>bad text')
+        self.assertTrue(txt[0]=='this')
+        self.assertTrue(txt[1] == 'is')
+        self.assertTrue(txt[2] == 'some')
+        self.assertTrue(txt[3] == 'funky')
+        self.assertTrue(txt[4] == 'p')
+        self.assertTrue(txt[5] == 'fantastic')
+        self.assertTrue(txt[6] == 'p')
+        self.assertTrue(txt[7] == 'bad')
+        self.assertTrue(txt[8] == 'text')
         self.assertTrue("<" not in txt)
         self.assertTrue("T" not in txt)
