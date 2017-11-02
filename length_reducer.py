@@ -19,7 +19,7 @@ class LengthReducer():
         for line in self.sysin:
             fields = line.split()
             if len(fields) == 2:
-                if fields[1] == "fantastically":
+                if "fantastically" in fields[1]:
                     self.save_data('fantastically', fields[0])
                     #search_count=search_count+1
 
