@@ -36,7 +36,7 @@ class LengthMapper():
         return results
 
     def save_data(self, key, value):
-        self.sysout.write("{1}\t{0}\n".format(key, value))
+        self.sysout.write("{1}\t->{0}<-\n".format(key, value))
 
     def map(self, word_list):
         all_words = dict()
