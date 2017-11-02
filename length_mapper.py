@@ -52,7 +52,7 @@ class LengthMapper():
                     for w in line_words:
                         if self.word_list[0] in w:
                             i = i + 1
-                            self.save_data(i, w)
+                            self.save_data(fields[0], w)
 
         except Exception as ex:
             logging.error("An error has occurred:\n{0}\n".format(ex.message))
