@@ -44,21 +44,16 @@ class LengthMapper():
         all_words = dict()
         logging.debug("Starting mapper job")
         i=0
-        try:
-            for line in self.sysin:
-                fields = line.split('\t')
-                for f in fields:
-                    line_words = self.splitter(f)
-                    for w in line_words:
-                        if self.word_list[0] in w:
-                            i = i + 1
-                            self.save_data(fields[0], w)
 
-        except Exception as ex:
-            logging.error("An error has occurred:\n{0}\n".format(ex.message))
-        finally:
-            logging.debug("Mapping complete. Closing local mapper log file.")
-            return all_words
+        for line in self.sysin:
+            fields = line.split('\t')
+            for f in fields:
+                line_words = self.splitter(f)
+                for w in line_words:
+                    if self.word_list[0] in w:
+                        i = i + 1
+                        self.save_data(fields[0], w)
+
 
 #Do the work
 if __name__ == "__main__":
