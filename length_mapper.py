@@ -43,6 +43,7 @@ class LengthMapper():
     def map(self):
         all_words = dict()
         logging.debug("Starting mapper job")
+        i=0
         try:
             for line in self.sysin:
                 fields = line.split('\t')
@@ -50,7 +51,8 @@ class LengthMapper():
                     line_words = self.splitter(fields[4])
                     for w in line_words:
                         if self.word_list[0] in w:
-                            self.save_data(fields[0], w)
+                            i = i + 1
+                            self.save_data(i, w)
 
         except Exception as ex:
             logging.error("An error has occurred:\n{0}\n".format(ex.message))
