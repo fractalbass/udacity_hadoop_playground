@@ -18,7 +18,7 @@ class DOWReducer():
     def reduce(self, q):
         result = None
         current_day = None
-        day_sales = 0
+        day_sales = list()
         count_days = 0
         for line in self.sysin:
             fields = line.split()
@@ -38,7 +38,7 @@ class DOWReducer():
                 else:
                     day_sales.append(float(fields[1]))
 
-        ave = self.get_average(day_sales, axis=0)
+        ave = self.get_average(day_sales)
         self.save_data(current_day, ave)
         if current_day == q:
             result = ave
