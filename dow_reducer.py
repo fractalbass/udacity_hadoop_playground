@@ -21,11 +21,11 @@ class DOWReducer():
     def get_stdev(self, l):
         total = 0.0
         for x in l:
-            total = total + float(x)
-        a = float(total/len(l))
+            total = total + long(x)
+        a = long(total/len(l))
         v = 0.0
         for x in l:
-            v = v + math.pow((a - float(x)),2)
+            v = v + math.pow((a - long(x)),2)
 
         stdev = math.sqrt(v/len(l))
         return stdev
@@ -48,11 +48,11 @@ class DOWReducer():
                     self.save_data(current_day, ave)
                     if current_day == q:
                         result = ave
-                    day_sales = [float(fields[1])]
+                    day_sales = [long(fields[1])]
                     current_day = fields[0]
 
                 else:
-                    day_sales.append(float(fields[1]))
+                    day_sales.append(long(fields[1]))
 
         ave = self.get_average(day_sales)
         self.save_data(current_day, ave)
