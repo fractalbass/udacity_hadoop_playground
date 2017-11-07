@@ -54,7 +54,7 @@ class DOWReducer():
                 else:
                     day_sales.append(float(fields[1]))
 
-        ave = self.get_stdev(day_sales)
+        ave = self.get_average(day_sales)
         self.save_data(current_day, ave)
         if current_day == q:
             result = ave
