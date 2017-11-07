@@ -21,11 +21,11 @@ class DOWReducer():
     def get_stdev(self, l):
         total = 0.0
         for x in l:
-            total = total + x
+            total = total + float(x)
         a = total/len(l)
         v = 0.0
         for x in l:
-            v = v + math.pow((a - x),2)
+            v = v + math.pow((a - float(x)),2)
 
         stdev = math.sqrt(v/len(l))
         return stdev
