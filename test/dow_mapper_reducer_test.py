@@ -23,5 +23,4 @@ class DOWMapperTest(unittest.TestCase):
         reducer = Reducer()
         l = [1,2,3,4,5,6]
         stdev = reducer.get_stdev(l)
-        print(stdev)
-        self.assertTrue(math.sqrt(math.pow(stdev-1.7078251276599,2)) < .0000001)
+        self.assertTrue(stdev==1.707825127659933)

@@ -10,11 +10,11 @@ class DOWReducer():
     def save_data(self, key, value):
         self.sysout.write("{0}\t{1}\n".format(key, value))
 
-    def get_average(self, l):
-        total = 0
-        for x in l:
-            total = total + float(x)
-        return total/len(l)
+    # def get_average(self, l):
+    #     total = 0
+    #     for x in l:
+    #         total = total + float(x)
+    #     return total/len(l)
 
     # Note:  This calculates the POPULATION stdev.  The sample stdev is
     # done differently.
@@ -44,7 +44,7 @@ class DOWReducer():
 
                 if fields[0] != current_day:
                     #Done with this day.  Summarize and print
-                    ave = self.get_average(day_sales)
+                    ave = self.get_stdev(day_sales)
                     self.save_data(current_day, ave)
                     if current_day == q:
                         result = ave
@@ -54,7 +54,7 @@ class DOWReducer():
                 else:
                     day_sales.append(fields[1])
 
-        ave = self.get_average(day_sales)
+        ave = self.get_stdev(day_sales)
         self.save_data(current_day, ave)
         if current_day == q:
             result = ave
