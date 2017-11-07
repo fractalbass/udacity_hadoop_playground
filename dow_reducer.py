@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import sys
+import math
 
 class DOWReducer():
 
@@ -14,6 +15,21 @@ class DOWReducer():
         for x in l:
             total = total + x
         return total/len(l)
+
+    # Note:  This calculates the POPULATION stdev.  The sample stdev is
+    # done differently.
+    def get_stdev(self, l):
+        total = 0.0
+        for x in l:
+            total = total + float(x)
+        a = float(total/len(l))
+        v = 0.0
+        for x in l:
+            v = v + math.pow((a - float(x)),2)
+
+        stdev = math.sqrt(v/len(l))
+        return stdev
+
 
     def reduce(self, q):
         result = None
@@ -38,7 +54,7 @@ class DOWReducer():
                 else:
                     day_sales.append(float(fields[1]))
 
-        ave = self.get_average(day_sales)
+        ave = self.get_stdev(day_sales)
         self.save_data(current_day, ave)
         if current_day == q:
             result = ave

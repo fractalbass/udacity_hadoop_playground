@@ -1,8 +1,3 @@
-
-
-
-
-
 #!/bin/bash
 echo "Using:"
 echo $1

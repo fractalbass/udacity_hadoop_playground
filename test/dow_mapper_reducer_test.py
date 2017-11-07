@@ -1,6 +1,7 @@
 from dow_mapper import DOWMapper as Mapper
 from dow_reducer import DOWReducer as Reducer
 import unittest
+import math
 import mock
 
 
@@ -17,3 +18,10 @@ class DOWMapperTest(unittest.TestCase):
         reducer.sysin = open('../data/dow_reducer_fixture.txt','r')
         x = reducer.reduce("Sunday")
         self.assertTrue(x == 61.0)
+
+    def test_reducer_stdev(self):
+        reducer = Reducer()
+        l = [1,2,3,4,5,6]
+        stdev = reducer.get_stdev(l)
+        print(stdev)
+        self.assertTrue(math.sqrt(math.pow(stdev-1.7078251276599,2)) < .0000001)
